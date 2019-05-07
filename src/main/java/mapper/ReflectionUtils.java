@@ -21,11 +21,11 @@ public final class ReflectionUtils {
 
   private static String moduleName = null;
 
-  public static void discoverObject(Class<?> clazz, Object obj, String moduleNameParam) {
+  public static void discoverObject(Object obj, String moduleNameParam) {
     moduleName = moduleNameParam;
     fieldMap = new LinkedHashMap<>();
     enumsMap = new HashMap<>();
-    discoverObject(clazz, obj, moduleName, new LinkedList<>());
+    discoverObject(obj.getClass(), obj, moduleName, new LinkedList<>());
     moduleMap.put(moduleNameParam, fieldMap);
     moduleEnumsMap.put(moduleNameParam, enumsMap);
   }

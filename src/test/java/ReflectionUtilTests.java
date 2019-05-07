@@ -14,11 +14,13 @@ import static org.junit.Assert.assertTrue;
 public class ReflectionUtilTests {
 
     private Person person;
+    private Person[] personArr;
 
     @Before
     public void setUp() {
         person = new Person("OLD NAME");
-        ReflectionUtils.discoverObject(Person.class, person, "Person");
+        personArr = new Person[]{new Person("PERSON1"), new Person("PERSON2"), new Person("PERSON3")};
+        ReflectionUtils.discoverObject(person, "Person");
     }
 
     @Test
@@ -30,7 +32,7 @@ public class ReflectionUtilTests {
     public void testNestedGetWithArrayObject() {
         assertEquals(person.getPet().getFoods()[1].getName(), ReflectionUtils.parameterGet("Person", person, "Person.Pet.Foods[0].Name"));
     }
-    // Yes I'm actually testing their mem adresses.
+    // Yes I'm actually testing their mem addresses.
     @Test
     public void testNestedGet() {
         assertTrue(person.getPet().getFoods() == ReflectionUtils.parameterGet("Person", person, "Person.Pet.Foods"));

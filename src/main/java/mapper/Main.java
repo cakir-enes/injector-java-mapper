@@ -7,6 +7,22 @@ import java.util.List;
 
 @SuppressWarnings("unchecked")
 public class Main {
+
+  static class Wrapper {
+    private Person[] personArr = new Person[]{new Person("PERSON1"), new Person("PERSON2"), new Person("PERSON3")};
+
+    public Person[] getPersonArr() {
+      return personArr;
+    }
+
+    public void setPersonArr(Person[] personArr) {
+      this.personArr = personArr;
+    }
+
+    public Wrapper() {
+    }
+  }
+
   public static void main(String[] args) {
 
     bench();
@@ -16,7 +32,8 @@ public class Main {
   public static void bench() {
     try {
       Person p = new Person("Old Name");
-      ReflectionUtils.discoverObject(Person.class, p, "Person");
+
+      ReflectionUtils.discoverObject(new Wrapper(), "Person");
       ReflectionUtils.getFieldMap("Person").keySet().forEach(System.out::println);
 //            ReflectionUtils.parameterSet(p, "Person.Pet.Foods[2].Id", 12l);
 //            System.out.println(ReflectionUtils.parameterGet(p, "Person.Pet.Foods[0].Id").toString());
